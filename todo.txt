@@ -1,0 +1,7 @@
+Seznam příkazů
+-	Vzit – uloží předmět do batohu
+-	Odebrat – odebere předmět z batogz
+
+-	Pouzit – použití předmětu z batohu (klíče k odemknutí)
+-	Prozkoumat – zobrazí detailnější popis prostoru – vypsání věcí, které se zde nacházejí
+

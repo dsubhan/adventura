@@ -15,6 +15,9 @@ package cz.vse.logika;
 public class Hra implements IHra {
     private SeznamPrikazu platnePrikazy;    // obsahuje seznam přípustných příkazů
     private HerniPlan herniPlan;
+
+    private Batoh batoh;
+
     private boolean konecHry = false;
 
     /**
@@ -23,9 +26,12 @@ public class Hra implements IHra {
     public Hra() {
         herniPlan = new HerniPlan();
         platnePrikazy = new SeznamPrikazu();
+        batoh = new Batoh(5);
+        batoh.pridejPredmet(new Predmet("pochodeň", true));
         platnePrikazy.vlozPrikaz(new PrikazNapoveda(platnePrikazy));
         platnePrikazy.vlozPrikaz(new PrikazJdi(herniPlan));
         platnePrikazy.vlozPrikaz(new PrikazKonec(this));
+        platnePrikazy.vlozPrikaz(new PrikazBatoh(batoh));
     }
 
     /**

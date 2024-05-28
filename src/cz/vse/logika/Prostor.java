@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 /**
  * Trida Prostor - popisuje jednotlivé prostory (místnosti) hry
@@ -25,6 +26,8 @@ public class Prostor {
     private String popis;
     private Set<Prostor> vychody;   // obsahuje sousední místnosti
 
+    private ArrayList<IPredmet> predmety; // obsahuje předměty v prostoru
+
     /**
      * Vytvoření prostoru se zadaným popisem, např. "kuchyň", "hala", "trávník
      * před domem"
@@ -37,6 +40,7 @@ public class Prostor {
         this.nazev = nazev;
         this.popis = popis;
         vychody = new HashSet<>();
+        predmety = new ArrayList<>();
     }
 
     /**
@@ -51,6 +55,46 @@ public class Prostor {
      */
     public void setVychod(Prostor vedlejsi) {
         vychody.add(vedlejsi);
+    }
+
+    /**
+     * Metoda pro přidání předmětu do prostoru
+     * @param predmet přidávaný předmět do prostoru
+     */
+    public void pridejPredmet(Predmet predmet){
+        if (!(predmety.contains(predmet))){
+            predmety.add(predmet);
+        }
+    }
+
+    /**
+     * Metoda pro odebrání předmětu z prostoru
+     * @param nazevPredmetu název odebíraného předmětu
+     * @return 0 pokud předmět neexistuje, 1 pokud předmět existuje ale není přenosný (nelze dát do batohu), 2 pokud byl předmět odebrán
+     */
+    public int odeberPredmet(String nazevPredmetu){
+        for (int i = 0; i < predmety.size(); i++){
+            if (predmety.get(i).getNazev().equals(nazevPredmetu)){
+                if (predmety.get(i).getPrenosnost()){
+                    predmety.remove(i);
+                    return 2;
+                }
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Metoda pro vypsání předmětů v prostoru
+     * @return texotvý řetězec názvů předmětů v místnosti
+     */
+    public String vypisPredmetu(){
+        String vypis = "Předměty v místnosti: \n|";
+        for (IPredmet predmet : predmety){
+            vypis += predmet.getNazev() + "|";
+        }
+        return vypis;
     }
 
     /**

@@ -3,7 +3,6 @@ package cz.vse.logika;
 
 /**
  *  Class HerniPlan - třída představující mapu a stav adventury.
- * 
  *  Tato třída inicializuje prvky ze kterých se hra skládá:
  *  vytváří všechny prostory,
  *  propojuje je vzájemně pomocí východů 
@@ -48,6 +47,7 @@ public class HerniPlan {
         Prostor dum_3 = new Prostor("hnědý_dům", "zchátralý hnědý dům, uprostřed místnosti je zaprášený stůl");
         
         // přiřazují se průchody mezi prostory (sousedící prostory)
+        // začátek hry - rozcestí
         rozcesti.setVychod(bazina);
         rozcesti.setVychod(vesnice);
         rozcesti.setVychod(tajemna_pesina);
@@ -63,7 +63,7 @@ public class HerniPlan {
         dum_1.setVychod(vesnice);
         dum_2.setVychod(vesnice);
         dum_3.setVychod(vesnice);
-
+        // tajemná pěšina spojující rozcestí a hrad
         tajemna_pesina.setVychod(hradni_nadvori);
         tajemna_pesina.setVychod(rozcesti);
         // prostor hradu
@@ -78,7 +78,17 @@ public class HerniPlan {
         pokladnice.setVychod(vstupni_sal);
 
                 
-        aktualniProstor = rozcesti;  // hra začíná na rozcesti
+        aktualniProstor = rozcesti;  // hra začíná na rozcestí
+
+        // Předměty v prostorech
+        Predmet klicOdTruhly = new Predmet("klíč", true);
+        Predmet lebka = new Predmet("lebka", true);
+        Predmet zabiHlen = new Predmet("žabí_hlen", false);
+
+        // Vložení předmětů do prostorů
+        dum_2.pridejPredmet(klicOdTruhly);
+        chyse.pridejPredmet(lebka);
+        chyse.pridejPredmet(zabiHlen);
     }
     
     /**
