@@ -69,20 +69,17 @@ public class Prostor {
 
     /**
      * Metoda pro odebrání předmětu z prostoru
-     * @param nazevPredmetu název odebíraného předmětu
-     * @return 0 pokud předmět neexistuje, 1 pokud předmět existuje ale není přenosný (nelze dát do batohu), 2 pokud byl předmět odebrán
+     * @param predmet název odebíraného předmětu
+     * @return true pokud byl předmět odebrán, false pokud nebyl odebrán
      */
-    public int odeberPredmet(String nazevPredmetu){
+    public boolean odeberPredmet(IPredmet predmet){
         for (int i = 0; i < predmety.size(); i++){
-            if (predmety.get(i).getNazev().equals(nazevPredmetu)){
-                if (predmety.get(i).getPrenosnost()){
-                    predmety.remove(i);
-                    return 2;
-                }
-                return 1;
+            if (predmety.get(i).equals(predmet)){
+                predmety.remove(i);
+                return true;
             }
         }
-        return 0;
+        return false;
     }
 
     /**
@@ -95,6 +92,39 @@ public class Prostor {
             vypis += predmet.getNazev() + "|";
         }
         return vypis;
+    }
+
+    /**
+     * Metoda pro vrácení předmětu podle jeho názvu
+     * @param nazev název předmětu
+     * @return vrácený předmět
+     */
+    public IPredmet getPredmet(String nazev) {
+        for (IPredmet predmet : predmety) {
+            if (predmet.getNazev().equals(nazev)) {
+                return predmet;
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Metoda pro zjištění, zda prostor obsahuje danou věc.
+     * @param nazev název věci
+     * @return true pokud obsahuje, false pokud neobsahuje
+     */
+    public boolean obsahujePredmet(String nazev){
+        for (IPredmet predmet : predmety) {
+            if (predmet.getNazev().equals(nazev)){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        return false;
     }
 
     /**

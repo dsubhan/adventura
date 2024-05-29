@@ -1,7 +1,7 @@
 Seznam příkazů
--	Vzit – uloží předmět do batohu
--	Odebrat – odebere předmět z batogz
+-	Vzit – uloží předmět do batohu DONE
+-	Odebrat – odebere předmět z batogz DONE
 
 -	Pouzit – použití předmětu z batohu (klíče k odemknutí)
--	Prozkoumat – zobrazí detailnější popis prostoru – vypsání věcí, které se zde nacházejí
 
+-	Prozkoumat – zobrazí detailnější popis prostoru – vypsání věcí, které se zde nacházejí DONE

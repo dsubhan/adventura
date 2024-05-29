@@ -23,33 +23,39 @@ public class Batoh {
 
     /**
      * Metoda pro přidání předmětu do batohu.
+     *
      * @param predmet přidávaný předmět
-     * @return true pokud byl předmět do batohu přidán, false pokud je batoh plný a předmět se do něho nevejde
      */
-    public boolean pridejPredmet(IPredmet predmet){
+    public void pridejPredmet(IPredmet predmet){
         if (predmety.size() < maxPocet){
             if (predmet.getPrenosnost()){
                 predmety.add(predmet);
-                return true;
             }
-            else {
-                return false;
-            }
-        }
-        else{
-            return false;
         }
     }
 
     /**
      * Metoda pro odebrání předmětu z batohu
+     *
      * @param nazevPredmetu název odebíraného předmětu
-     * @return true pokud byl předmět odebrán, false pokud předmět v batohu není
      */
-    public boolean odeberPredmet(String nazevPredmetu){
+    public void odeberPredmet(String nazevPredmetu){
         for (int i = 0; i < predmety.size(); i++){
             if (predmety.get(i).getNazev().equals(nazevPredmetu)){
                 predmety.remove(i);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Metoda pro kontrolu existence předmětu v batohu
+     * @param nazev název předmětu
+     * @return true pokud existuje, false pokud ne
+     */
+    public boolean obsahujePredmet(String nazev){
+        for (IPredmet predmet : predmety) {
+            if (predmet.getNazev().equals(nazev)){
                 return true;
             }
         }
