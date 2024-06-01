@@ -21,6 +21,7 @@ public class Batoh {
         this.predmety = new ArrayList<>();
     }
 
+
     /**
      * Metoda pro přidání předmětu do batohu.
      *
@@ -60,6 +61,23 @@ public class Batoh {
             }
         }
         return false;
+    }
+
+
+    /**
+     * Metoda pro získání počtu předmětů v batohu
+     * @return počet předmětů v batohu
+     */
+    public int getPocetPredmetu(){
+        return predmety.size();
+    }
+
+    /**
+     * Metoda pro získání maximálního počtu předmětů v batohu
+     * @return maximální počet předmětů v baothu
+     */
+    public int getMaxPocet() {
+        return maxPocet;
     }
 
     /**

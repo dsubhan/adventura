@@ -60,6 +60,7 @@ public class Prostor {
     /**
      * Metoda pro přidání předmětu do prostoru
      * @param predmet přidávaný předmět do prostoru
+     * @author David Subhan, subd02, subd02@vse.cz
      */
     public void pridejPredmet(Predmet predmet){
         if (!(predmety.contains(predmet))){
@@ -69,22 +70,23 @@ public class Prostor {
 
     /**
      * Metoda pro odebrání předmětu z prostoru
+     *
      * @param predmet název odebíraného předmětu
-     * @return true pokud byl předmět odebrán, false pokud nebyl odebrán
+     * @author David Subhan, subd02, subd02@vse.cz
      */
-    public boolean odeberPredmet(IPredmet predmet){
+    public void odeberPredmet(IPredmet predmet){
         for (int i = 0; i < predmety.size(); i++){
             if (predmety.get(i).equals(predmet)){
                 predmety.remove(i);
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     /**
      * Metoda pro vypsání předmětů v prostoru
      * @return texotvý řetězec názvů předmětů v místnosti
+     * @author David Subhan, subd02, subd02@vse.cz
      */
     public String vypisPredmetu(){
         String vypis = "Předměty v místnosti: \n|";
@@ -98,13 +100,12 @@ public class Prostor {
      * Metoda pro vrácení předmětu podle jeho názvu
      * @param nazev název předmětu
      * @return vrácený předmět
+     * @author David Subhan, subd02, subd02@vse.cz
      */
     public IPredmet getPredmet(String nazev) {
         for (IPredmet predmet : predmety) {
             if (predmet.getNazev().equals(nazev)) {
                 return predmet;
-            } else {
-                return null;
             }
         }
         return null;
@@ -114,15 +115,14 @@ public class Prostor {
      * Metoda pro zjištění, zda prostor obsahuje danou věc.
      * @param nazev název věci
      * @return true pokud obsahuje, false pokud neobsahuje
+     * @author David Subhan, subd02, subd02@vse.cz
      */
     public boolean obsahujePredmet(String nazev){
         for (IPredmet predmet : predmety) {
             if (predmet.getNazev().equals(nazev)){
                 return true;
             }
-            else {
-                return false;
-            }
+
         }
         return false;
     }
@@ -201,10 +201,10 @@ public class Prostor {
      *
      * @return Popis východů - názvů sousedních prostorů
      */
-    private String popisVychodu() {
-        String vracenyText = "východy:";
+    public String popisVychodu() {
+        String vracenyText = "východy: |";
         for (Prostor sousedni : vychody) {
-            vracenyText += " " + sousedni.getNazev();
+            vracenyText += sousedni.getNazev() + "|";
         }
         return vracenyText;
     }

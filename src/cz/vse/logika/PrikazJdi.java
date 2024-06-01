@@ -10,14 +10,19 @@ package cz.vse.logika;
 class PrikazJdi implements IPrikaz {
     private static final String NAZEV = "jdi";
     private HerniPlan plan;
+    private Batoh batoh;
+
+    private Hra hra;
     
     /**
     *  Konstruktor třídy
     *  
     *  @param plan herní plán, ve kterém se bude ve hře "chodit" 
     */    
-    public PrikazJdi(HerniPlan plan) {
+    public PrikazJdi(HerniPlan plan, Batoh batoh, Hra hra) {
         this.plan = plan;
+        this.batoh = batoh;
+        this.hra = hra;
     }
 
     /**
@@ -43,6 +48,13 @@ class PrikazJdi implements IPrikaz {
 
         if (sousedniProstor == null) {
             return "Tam se odsud jít nedá!";
+        }
+        // pokud se přešlo do prosotru skrytá_místnost a vypíšeme gratulační text
+        else if (smer.equals("skrytá_místnost")){
+            plan.setAktualniProstor(sousedniProstor);
+            batoh.odeberPredmet("klíč");
+            hra.setKonecHry(true);
+            return sousedniProstor.dlouhyPopis() + "\nGratuluji, našel jsi ztracený poklad.";
         }
         else {
             plan.setAktualniProstor(sousedniProstor);

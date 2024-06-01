@@ -8,13 +8,15 @@ public class PrikazProzkoumat implements IPrikaz{
     private static final String NAZEV = "prozkoumat";
 
     private HerniPlan herniPlan;
+    private Batoh batoh;
 
     /**
      * Konstruktor třídy
      * @param herniPlan herní plán pro získání aktuálního prostoru
      */
-    public PrikazProzkoumat(HerniPlan herniPlan) {
+    public PrikazProzkoumat(HerniPlan herniPlan, Batoh batoh) {
         this.herniPlan = herniPlan;
+        this.batoh = batoh;
     }
 
     /**
@@ -25,8 +27,19 @@ public class PrikazProzkoumat implements IPrikaz{
     @Override
     public String provedPrikaz(String... parametry) {
         Prostor prostor = herniPlan.getAktualniProstor();
+        //pokud se nacházíme v pokladnici a prozkoumáme ji, vytvoří se nová místnost a vloží se do ní poklad
+        if (prostor.getNazev().equals("pokladnice") && batoh.obsahujePredmet("klíč")){
+            Prostor skryta_mistnost = new Prostor("skrytá_místnost", "skrytá místnost s pokladem");
+            skryta_mistnost.pridejPredmet(new Predmet("poklad", true));
+            prostor.setVychod(skryta_mistnost);
+            skryta_mistnost.setVychod(prostor);
+            return "Našel jsi skryté dveře \n" + prostor.popisVychodu();
+        }
+        else{
+            return prostor.vypisPredmetu() + "\n" + prostor.popisVychodu();
+        }
 
-        return prostor.vypisPredmetu();
+
     }
 
     /**

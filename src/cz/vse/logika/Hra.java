@@ -28,13 +28,14 @@ public class Hra implements IHra {
         platnePrikazy = new SeznamPrikazu();
         batoh = new Batoh(5);
         batoh.pridejPredmet(new Predmet("pochodeň", true));
+
         platnePrikazy.vlozPrikaz(new PrikazNapoveda(platnePrikazy));
-        platnePrikazy.vlozPrikaz(new PrikazJdi(herniPlan));
+        platnePrikazy.vlozPrikaz(new PrikazJdi(herniPlan, batoh, this));
         platnePrikazy.vlozPrikaz(new PrikazKonec(this));
         platnePrikazy.vlozPrikaz(new PrikazBatoh(batoh));
         platnePrikazy.vlozPrikaz(new PrikazVzit(batoh, herniPlan));
         platnePrikazy.vlozPrikaz(new PrikazOdebrat(batoh));
-        platnePrikazy.vlozPrikaz(new PrikazProzkoumat(herniPlan));
+        platnePrikazy.vlozPrikaz(new PrikazProzkoumat(herniPlan, batoh));
     }
 
     /**
@@ -110,6 +111,8 @@ public class Hra implements IHra {
      public HerniPlan getHerniPlan(){
         return herniPlan;
      }
+
+     public Batoh getBatoh(){ return batoh; }
     
 }
 

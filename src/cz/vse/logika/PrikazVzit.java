@@ -36,9 +36,15 @@ public class PrikazVzit implements IPrikaz{
         else if (parametry.length == 1 && prostor.obsahujePredmet(parametry[0])){
             IPredmet predmet = prostor.getPredmet(parametry[0]);
             if (predmet.getPrenosnost()){
-                batoh.pridejPredmet(predmet);
-                prostor.odeberPredmet(predmet);
-                return "Předmět " + predmet.getNazev() + " se ti přidal do batohu";
+                if (batoh.getPocetPredmetu() < batoh.getMaxPocet()){
+                    batoh.pridejPredmet(predmet);
+                    prostor.odeberPredmet(predmet);
+                    return "Předmět " + predmet.getNazev() + " se ti přidal do batohu";
+                }
+                else {
+                    return "Nemáš místo v batohu. Odeber nějaký předmět.";
+                }
+
             }
             else {
                 return "Tento předmět nelze vzít";
