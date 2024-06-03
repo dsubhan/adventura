@@ -14,6 +14,7 @@ public class Batoh {
 
     /**
      * Vytvoření batohu s maximálním počtem předmětů.
+     *
      * @param maxPocet maximální počet předmětů, které se vejdou do batohu
      */
     public Batoh(int maxPocet) {
@@ -27,9 +28,9 @@ public class Batoh {
      *
      * @param predmet přidávaný předmět
      */
-    public void pridejPredmet(IPredmet predmet){
-        if (predmety.size() < maxPocet){
-            if (predmet.getPrenosnost()){
+    public void pridejPredmet(IPredmet predmet) {
+        if (predmety.size() < maxPocet) {
+            if (predmet.getPrenosnost()) {
                 predmety.add(predmet);
             }
         }
@@ -40,9 +41,9 @@ public class Batoh {
      *
      * @param nazevPredmetu název odebíraného předmětu
      */
-    public void odeberPredmet(String nazevPredmetu){
-        for (int i = 0; i < predmety.size(); i++){
-            if (predmety.get(i).getNazev().equals(nazevPredmetu)){
+    public void odeberPredmet(String nazevPredmetu) {
+        for (int i = 0; i < predmety.size(); i++) {
+            if (predmety.get(i).getNazev().equals(nazevPredmetu)) {
                 predmety.remove(i);
                 return;
             }
@@ -51,12 +52,13 @@ public class Batoh {
 
     /**
      * Metoda pro kontrolu existence předmětu v batohu
+     *
      * @param nazev název předmětu
      * @return true pokud existuje, false pokud ne
      */
-    public boolean obsahujePredmet(String nazev){
+    public boolean obsahujePredmet(String nazev) {
         for (IPredmet predmet : predmety) {
-            if (predmet.getNazev().equals(nazev)){
+            if (predmet.getNazev().equals(nazev)) {
                 return true;
             }
         }
@@ -66,14 +68,16 @@ public class Batoh {
 
     /**
      * Metoda pro získání počtu předmětů v batohu
+     *
      * @return počet předmětů v batohu
      */
-    public int getPocetPredmetu(){
+    public int getPocetPredmetu() {
         return predmety.size();
     }
 
     /**
      * Metoda pro získání maximálního počtu předmětů v batohu
+     *
      * @return maximální počet předmětů v baothu
      */
     public int getMaxPocet() {
@@ -82,12 +86,13 @@ public class Batoh {
 
     /**
      * Metoda pro vypsání všech předmětů v batohu.
+     *
      * @return textový řetězec předmětů v batohu
      */
     @Override
     public String toString() {
         String vypisPredmetu = "|";
-        for (IPredmet predmet : predmety){
+        for (IPredmet predmet : predmety) {
             vypisPredmetu += predmet.getNazev() + "|";
         }
         return vypisPredmetu;

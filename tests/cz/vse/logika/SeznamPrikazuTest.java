@@ -22,7 +22,7 @@ public class SeznamPrikazuTest
     public void setUp() {
         hra = new Hra();
         prKonec = new PrikazKonec(hra);
-        prJdi = new PrikazJdi(hra.getHerniPlan(), hra.getBatoh());
+        prJdi = new PrikazJdi(hra.getHerniPlan(), hra.getBatoh(), hra);
     }
 
     @Test

@@ -3,7 +3,7 @@ package cz.vse.logika;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /*******************************************************************************
  * Testovací třída HraTest slouží ke komplexnímu otestování
@@ -46,14 +46,39 @@ public class HraTest {
      */
     @Test
     public void testPrubehHry() {
-        assertEquals("domeček", hra1.getHerniPlan().getAktualniProstor().getNazev());
-        hra1.zpracujPrikaz("jdi les");
-        assertEquals(false, hra1.konecHry());
-        assertEquals("les", hra1.getHerniPlan().getAktualniProstor().getNazev());
-        hra1.zpracujPrikaz("jdi hluboký_les");
-        assertEquals(false, hra1.konecHry());
-        assertEquals("hluboký_les", hra1.getHerniPlan().getAktualniProstor().getNazev());
-        hra1.zpracujPrikaz("konec");
-        assertEquals(true, hra1.konecHry());
+        assertEquals("rozcestí", hra1.getHerniPlan().getAktualniProstor().getNazev());
+        hra1.zpracujPrikaz("jdi vesnice");
+        assertFalse(hra1.konecHry());
+        assertEquals("vesnice", hra1.getHerniPlan().getAktualniProstor().getNazev());
+
+        hra1.zpracujPrikaz("jdi radnice");
+        assertFalse(hra1.konecHry());
+        assertEquals("radnice", hra1.getHerniPlan().getAktualniProstor().getNazev());
+
+        assertTrue(hra1.getHerniPlan().getAktualniProstor().obsahujePredmet("klíč"));
+        hra1.zpracujPrikaz("vzít klíč");
+        assertTrue(hra1.getBatoh().obsahujePredmet("klíč"));
+        assertFalse(hra1.getHerniPlan().getAktualniProstor().obsahujePredmet("klíč"));
+        hra1.zpracujPrikaz("jdi vesnice");
+        assertEquals("vesnice", hra1.getHerniPlan().getAktualniProstor().getNazev());
+        assertFalse(hra1.konecHry());
+
+        hra1.zpracujPrikaz("jdi rozcestí");
+        assertFalse(hra1.konecHry());
+        hra1.zpracujPrikaz("jdi tajemná_pěšina");
+        assertFalse(hra1.konecHry());
+        hra1.zpracujPrikaz("jdi hradní_nádvoří");
+        assertFalse(hra1.konecHry());
+        hra1.zpracujPrikaz("jdi hrad");
+        assertFalse(hra1.konecHry());
+        hra1.zpracujPrikaz("jdi vstupní_sál");
+        assertFalse(hra1.konecHry());
+        hra1.zpracujPrikaz("jdi pokladnice");
+        assertFalse(hra1.konecHry());
+        hra1.zpracujPrikaz("prozkoumat");
+        assertFalse(hra1.konecHry());
+        hra1.zpracujPrikaz("jdi skrytá_místnost");
+        assertFalse(hra1.getBatoh().obsahujePredmet("klíč"));
+        assertTrue(hra1.konecHry());
     }
 }

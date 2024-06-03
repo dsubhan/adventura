@@ -5,21 +5,24 @@ package cz.vse.logika;
  *
  * @author David Subhan, subd02, subd02@vse.cz
  */
-public class Predmet implements IPredmet{
+public class Predmet implements IPredmet {
     private String nazev;
     private boolean jePrenosnosna;
 
     /**
      * Vytvoření předmětu s jeho názvem.
+     *
      * @param nazev název předmětu
+     * @param prenosnost přenosnost předmětu - true/false
      */
-    public Predmet(String nazev, boolean prenosnost){
+    public Predmet(String nazev, boolean prenosnost) {
         this.nazev = nazev;
         this.jePrenosnosna = prenosnost;
     }
 
     /**
      * Metoda pro získání názvu předmětu.
+     *
      * @return název předmětu
      */
     @Override
@@ -29,6 +32,7 @@ public class Predmet implements IPredmet{
 
     /**
      * Metoda pro získání přenosnosti předmětu.
+     *
      * @return true pokud je přesný, false pokud není
      */
     @Override

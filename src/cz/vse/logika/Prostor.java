@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 /**
  * Trida Prostor - popisuje jednotlivé prostory (místnosti) hry
- *
+ * <p>
  * Tato třída je součástí jednoduché textové hry.
- *
+ * <p>
  * "Prostor" reprezentuje jedno místo (místnost, prostor, ..) ve scénáři hry.
  * Prostor může mít sousední prostory připojené přes východy. Pro každý východ
  * si prostor ukládá odkaz na sousedící prostor.
@@ -33,7 +33,7 @@ public class Prostor {
      * před domem"
      *
      * @param nazev nazev prostoru, jednoznačný identifikátor, jedno slovo nebo
-     * víceslovný název bez mezer.
+     *              víceslovný název bez mezer.
      * @param popis Popis prostoru.
      */
     public Prostor(String nazev, String popis) {
@@ -51,7 +51,6 @@ public class Prostor {
      * žádné chybové hlášení). Lze zadat též cestu ze do sebe sama.
      *
      * @param vedlejsi prostor, který sousedi s aktualnim prostorem.
-     *
      */
     public void setVychod(Prostor vedlejsi) {
         vychody.add(vedlejsi);
@@ -59,11 +58,12 @@ public class Prostor {
 
     /**
      * Metoda pro přidání předmětu do prostoru
+     *
      * @param predmet přidávaný předmět do prostoru
      * @author David Subhan, subd02, subd02@vse.cz
      */
-    public void pridejPredmet(Predmet predmet){
-        if (!(predmety.contains(predmet))){
+    public void pridejPredmet(Predmet predmet) {
+        if (!(predmety.contains(predmet))) {
             predmety.add(predmet);
         }
     }
@@ -74,9 +74,9 @@ public class Prostor {
      * @param predmet název odebíraného předmětu
      * @author David Subhan, subd02, subd02@vse.cz
      */
-    public void odeberPredmet(IPredmet predmet){
-        for (int i = 0; i < predmety.size(); i++){
-            if (predmety.get(i).equals(predmet)){
+    public void odeberPredmet(IPredmet predmet) {
+        for (int i = 0; i < predmety.size(); i++) {
+            if (predmety.get(i).equals(predmet)) {
                 predmety.remove(i);
                 return;
             }
@@ -85,12 +85,13 @@ public class Prostor {
 
     /**
      * Metoda pro vypsání předmětů v prostoru
+     *
      * @return texotvý řetězec názvů předmětů v místnosti
      * @author David Subhan, subd02, subd02@vse.cz
      */
-    public String vypisPredmetu(){
+    public String vypisPredmetu() {
         String vypis = "Předměty v místnosti: \n|";
-        for (IPredmet predmet : predmety){
+        for (IPredmet predmet : predmety) {
             vypis += predmet.getNazev() + "|";
         }
         return vypis;
@@ -98,6 +99,7 @@ public class Prostor {
 
     /**
      * Metoda pro vrácení předmětu podle jeho názvu
+     *
      * @param nazev název předmětu
      * @return vrácený předmět
      * @author David Subhan, subd02, subd02@vse.cz
@@ -113,13 +115,14 @@ public class Prostor {
 
     /**
      * Metoda pro zjištění, zda prostor obsahuje danou věc.
+     *
      * @param nazev název věci
      * @return true pokud obsahuje, false pokud neobsahuje
      * @author David Subhan, subd02, subd02@vse.cz
      */
-    public boolean obsahujePredmet(String nazev){
+    public boolean obsahujePredmet(String nazev) {
         for (IPredmet predmet : predmety) {
-            if (predmet.getNazev().equals(nazev)){
+            if (predmet.getNazev().equals(nazev)) {
                 return true;
             }
 
@@ -131,13 +134,13 @@ public class Prostor {
      * Metoda equals pro porovnání dvou prostorů. Překrývá se metoda equals ze
      * třídy Object. Dva prostory jsou shodné, pokud mají stejný název. Tato
      * metoda je důležitá z hlediska správného fungování seznamu východů (Set).
-     *
+     * <p>
      * Bližší popis metody equals je u třídy Object.
      *
      * @param o object, který se má porovnávat s aktuálním
      * @return hodnotu true, pokud má zadaný prostor stejný název, jinak false
-     */  
-      @Override
+     */
+    @Override
     public boolean equals(Object o) {
         // porovnáváme zda se nejedná o dva odkazy na stejnou instanci
         if (this == o) {
@@ -154,7 +157,7 @@ public class Prostor {
         //Vrátí true pro stejné názvy a i v případě, že jsou oba názvy null,
         //jinak vrátí false.
 
-       return (java.util.Objects.equals(this.nazev, druhy.nazev));       
+        return (java.util.Objects.equals(this.nazev, druhy.nazev));
     }
 
     /**
@@ -171,7 +174,7 @@ public class Prostor {
         vysledek = 37 * vysledek + hashNazvu;
         return vysledek;
     }
-      
+
 
     /**
      * Vrací název prostoru (byl zadán při vytváření prostoru jako parametr
@@ -180,7 +183,7 @@ public class Prostor {
      * @return název prostoru
      */
     public String getNazev() {
-        return nazev;       
+        return nazev;
     }
 
     /**
@@ -197,7 +200,7 @@ public class Prostor {
 
     /**
      * Vrací textový řetězec, který popisuje sousední východy, například:
-     * "vychody: hala ".
+     * "vychody: |hala|".
      *
      * @return Popis východů - názvů sousedních prostorů
      */
@@ -219,14 +222,13 @@ public class Prostor {
      * null, pokud prostor zadaného jména není sousedem.
      */
     public Prostor vratSousedniProstor(String nazevSouseda) {
-        List<Prostor>hledaneProstory = 
-            vychody.stream()
-                   .filter(sousedni -> sousedni.getNazev().equals(nazevSouseda))
-                   .collect(Collectors.toList());
-        if(hledaneProstory.isEmpty()){
+        List<Prostor> hledaneProstory =
+                vychody.stream()
+                        .filter(sousedni -> sousedni.getNazev().equals(nazevSouseda))
+                        .collect(Collectors.toList());
+        if (hledaneProstory.isEmpty()) {
             return null;
-        }
-        else {
+        } else {
             return hledaneProstory.get(0);
         }
     }
